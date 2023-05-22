@@ -18,7 +18,15 @@ public class Main {
         System.out.printf("list of people before sorting:%s.\n", printPeople);
         System.out.println("\nTask 2: the maximum number of words in the surname is indicated");
 
-        Collections.sort(people, new PersonsSurnameAgeComparator(4));
+        Collections.sort(people, (o1, o2) -> {
+            public int compare(Person o1, Person o2) {
+                if (o1.getSurnameSet().size() == o2.getSurnameSet().size()
+                        || (!(o1.getSurnameSet().size() < maxWord)
+                        && o2.getSurnameSet().size() >= maxWord))
+                    return Integer.compare(o1.getAge(), o2.getAge());
+                else return Integer.compare(o1.getSurnameSet().size(), o2.getSurnameSet().size());
+            }
+        });
 
         System.out.printf("List after sorting:%s.\n", people.toString().replaceAll("\\[|\\]", ""));
     }
